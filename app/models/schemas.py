@@ -1,11 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 from datetime import datetime
+from ..models.models import ContentStatus
 
 class TopicBase(BaseModel):
     title: str
     description: Optional[str] = None
-    status: str = "pending"
+    status: ContentStatus = ContentStatus.PENDING
 
 class TopicCreate(TopicBase):
     pass
@@ -13,6 +14,6 @@ class TopicCreate(TopicBase):
 class Topic(TopicBase):
     id: int
     created_at: datetime
+    updated_at: datetime
     
-    class Config:
-        from_attributes = True  # This enables ORM model -> Pydantic model conversion
+    model_config = ConfigDict(from_attributes=True)

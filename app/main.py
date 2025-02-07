@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .database import engine
-from .models import models  # Import models instead of schemas
+from .models import models
 from .api import topics
 
 # Create database tables

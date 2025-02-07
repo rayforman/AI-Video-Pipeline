@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from typing import Dict
 
 from ..models import schemas
+from ..models.models import ContentStatus
 from ..database import get_db
 from ..services.openai_service import generate_video_topic
 from ..crud import topics as topics_crud
@@ -22,7 +23,7 @@ def generate_topic(db: Session = Depends(get_db)):
         topic_create = schemas.TopicCreate(
             title=topic_data["title"],
             description=topic_data["description"],
-            status="pending"
+            status=ContentStatus.PENDING
         )
         
         # Save to database
