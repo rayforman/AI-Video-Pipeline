@@ -4,7 +4,7 @@ from typing import Dict
 
 from ..models import schemas
 from ..models.models import ContentStatus
-from ..database import get_db
+from ..dependencies import get_db
 from ..services.openai_service import generate_video_topic
 from ..crud import topics as topics_crud
 
@@ -36,3 +36,7 @@ def generate_topic(db: Session = Depends(get_db)):
             status_code=500,
             detail=f"Failed to generate topic: {str(e)}"
         )
+
+@router.post("/", response_model=schemas.Topic)
+def create_topic(topic: schemas.TopicCreate, db: Session = Depends(get_db)):
+    return topics_crud.create_topic(db=db, topic=topic)

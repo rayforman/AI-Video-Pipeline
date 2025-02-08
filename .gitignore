@@ -37,3 +37,5 @@ ENV/
 # Operating System
 .DS_Store
 Thumbs.db
+
+# Temporary files
